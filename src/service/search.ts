@@ -1,11 +1,11 @@
 import { range, random } from "lodash";
 
-type Results = {
-  spaces: Space[];
-};
-
 type Space = {
   name: string;
+};
+
+type Results = {
+  spaces: Space[];
 };
 
 /**
@@ -36,7 +36,7 @@ const searchSpaces = (searchText: string): Promise<Results> => {
         const spaces = ALL_PARKING_SPACES.filter(
           ({ name }) => name.indexOf(searchText) !== -1
         );
-        res(spaces);
+        res({ spaces });
       } else {
         rej(new Error("Network error"));
       }
