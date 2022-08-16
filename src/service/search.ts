@@ -1,10 +1,10 @@
 import { range, random } from "lodash";
 
-type Space = {
+export type Space = {
   name: string;
 };
 
-type Results = {
+export type Results = {
   spaces: Space[];
 };
 
