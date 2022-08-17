@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
+import _ from "lodash";
 import { delay } from "../../service/delay";
 import { Results, searchSpaces, Space } from "../../service/search";
 
@@ -7,10 +8,8 @@ export const Search: FC = () => {
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-
-    searchSpaces(e.target.value.trim())
+  const search = (value: string) => {
+    searchSpaces(value.trim())
       .then((res) => delay(res, 500))
       .then((res: Results) => {
         setIsError(false);
@@ -21,6 +20,16 @@ export const Search: FC = () => {
         setIsError(true);
         setSpaces([]);
       });
+  };
+
+  const debouncedSearch = useCallback(
+    _.debounce((value: string) => search(value), 500),
+    []
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    debouncedSearch(e.target.value);
   };
 
   return (
