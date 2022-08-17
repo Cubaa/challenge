@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import { delay } from "../../service/delay";
 import { Results, searchSpaces, Space } from "../../service/search";
 
 export const Search: FC = () => {
@@ -10,6 +11,7 @@ export const Search: FC = () => {
     setInputValue(e.target.value);
 
     searchSpaces(e.target.value.trim())
+      .then((res) => delay(res, 500))
       .then((res: Results) => {
         setIsError(false);
         setSpaces(res.spaces);
