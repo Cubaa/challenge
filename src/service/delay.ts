@@ -1,4 +1,2 @@
-import { Results } from "./search";
-
-export const delay = (value: Results, ms: number): Promise<Results> =>
+export const delay = <T>(value: T, ms: number): Promise<T> =>
   new Promise((resolve) => setTimeout(resolve, ms, value));

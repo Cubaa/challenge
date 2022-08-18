@@ -1,10 +1,18 @@
 import React from "react";
-import { Search } from "./components/search/search";
+import { SearchAddress } from "./components/search-address/search-address";
+import { SearchSpaces } from "./components/search-spaces/search-spaces";
 
 function App() {
   return (
-    <div>
-      <Search />
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <div style={{ textAlign: "center" }}>
+        <p>Search space</p>
+        <SearchSpaces />
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <p>Search address</p>
+        <SearchAddress />
+      </div>
     </div>
   );
 }
